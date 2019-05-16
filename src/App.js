@@ -1,26 +1,74 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import TodoList from './components/ToDoList';
+import CompleteList from './components/CompleteList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const taskCardData = [
+  {
+      title: "Add Taskcard",
+      priority: "1",
+      desc: "Add task into to do list",
+      complete: false
+  },
+  {
+      title: "Delete Taskcard",
+      priority: "2",
+      desc: "Remove task from to do list",
+      complete: true
+  },
+  {
+    title: "Set Priority",
+    priority: "4",
+    desc: "Add Priority feature into to do list",
+    complete: false
+},
+]
+
+class App extends React.Component {
+   
+  state={
+    taskCardsToDo :[],
+    taskCardsComplete:[]
+  };
+
+
+  componentDidMount() {
+    
+    const todoCards = taskCardData.filter( task =>{
+      return (
+        task.complete == false
+      )
+    });
+
+    const completedCards = taskCardData.filter( task =>{
+      return (
+        task.complete == true
+      )
+    });
+
+      this.setState(
+        {
+          taskCardsToDo: todoCards,
+          taskCardsComplete: completedCards
+        }
+      )
+
+  }
+
+
+  render(){
+    return (
+      <div className="app-container">
+        <div className="panel-todo">
+            <TodoList taskCards = {this.taskCardsToDo} />
+        </div>
+        <div className="panel-complete">
+            <CompleteList taskCards = {this.taskCardsComplete} />
+        </div>
+      </div>
   );
+  }
+ 
 }
 
 export default App;
