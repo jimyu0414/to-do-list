@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
-import TaskCard from './TaskCard';
 import ToggleableTaskCardForm from './ToggleableTaskCardForm';
-
+import TaskCardList from './TaskCardList';
 class ToDoList extends Component{
-    state = {
-    taskcards: [],
-  };
 
     render(){
         return(
             <div>
                 <ToggleableTaskCardForm />
                 <TaskCardList 
-                    cards = {this.props.taskcards}
+                    cards = {this.props.taskCards}
                 />
             </div>
         )
@@ -20,11 +16,3 @@ class ToDoList extends Component{
 }
 
 export default ToDoList;
-
-class TaskCardList extends Component{
-    render(){
-        return(
-            <span>1</span>
-        );
-    }
-}

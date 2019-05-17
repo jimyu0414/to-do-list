@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-import TaskCard from './TaskCard';
+import TaskCardList from './TaskCardList';
+
 
 class CompleteList extends Component{
     render(){
         return(
-            <div></div>
+            <TaskCardList 
+                    cards = {this.props.taskCards}
+                />
         )
     }
 }
