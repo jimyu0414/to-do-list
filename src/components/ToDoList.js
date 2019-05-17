@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ToggleableTaskCardForm from './ToggleableTaskCardForm';
 import TaskCardList from './TaskCardList';
+
 class ToDoList extends Component{
 
     render(){
@@ -9,6 +10,8 @@ class ToDoList extends Component{
                 <ToggleableTaskCardForm />
                 <TaskCardList 
                     cards = {this.props.taskCards}
+                    removeCard = {this.props.removeTask}
+                    completeCard = {this.props.completeTask}
                 />
             </div>
         )

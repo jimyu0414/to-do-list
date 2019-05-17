@@ -56,6 +56,11 @@
     width: 90%;
     margin-bottom: 1rem;
   }
+  &__card-completed{
+    .MuiCardContent-root-35{
+      background: #f2fce8;
+    }
+  }
 }
 
 .task-card-list{

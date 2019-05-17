@@ -11,11 +11,13 @@ class TaskCardList extends Component {
                 title={card.title}
                 priority={card.priority}
                 desc={card.desc}
-                complete={card.complete}  
+                complete={card.complete} 
+                removeCard={this.props.removeCard}
+                completeCard={this.props.completeCard}
             />)
         })
         return(
-            <div class="task-card-list">
+            <div className="task-card-list">
                 {cardList}
             </div>
         )

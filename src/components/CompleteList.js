@@ -6,8 +6,10 @@ class CompleteList extends Component{
     render(){
         return(
             <TaskCardList 
-                    cards = {this.props.taskCards}
-                />
+             cards = {this.props.taskCards}
+             removeCard = {this.props.removeTask}
+             completeCard = {this.props.completeTask}
+            />
         )
     }
 }

@@ -8,37 +8,49 @@ import Typography from '@material-ui/core/Typography';
 
 class TaskCard extends Component{
 
-    remove = () ={
-        this.props.removeCard(this.props.id);
-    }
+  handleCardTrash = () =>{
+    this.props.removeCard(this.props.id);
+  }
+
+  handleCardComplete = () =>{
+    this.props.completeCard(this.props.id);
+  }
 
     render(){
     
-    /*Display proper buttons 
-    for completed card and 
-    none completed card*/
+    /*
+      Display proper buttons 
+      for completed card and 
+      incompleted card
+    */
     const button =  this.props.complete ? <CardActions>
-    <Button size="small" color="primary" onClick={this.remove}>
+    <Button size="small" color="primary" onClick={this.handleCardTrash}>
       Remove
     </Button>
   </CardActions>  : <CardActions>
-    <Button size="small" color="primary">
+    <Button size="small" color="primary" onClick={this.handleCardComplete}>
       Complete
     </Button>
-    <Button size="small" color="primary" onClick={this.remove}>
+    <Button size="small" color="primary" onClick={this.handleCardTrash}>
       Remove
     </Button>
   </CardActions>
+
+    /* 
+      Apply different class to completed card
+      and incompleted card
+    */
+    const cardClass = this.props.complete ? 'task-card__card-completed' : 'task-card__card-incompleted'
   
 
     return(
-    <Card className="task-card__card">
+    <Card className={cardClass + " task-card__card"}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {this.props.title}
           </Typography>
-          <Typography gutterBottom variant="h8" component="h3">
+          <Typography gutterBottom variant="h6" component="h3">
             Priority: {this.props.priority}
           </Typography>
           <Typography component="p">
