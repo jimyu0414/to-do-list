@@ -4,6 +4,7 @@
   background-color: #fff;
   min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   max-width: 1280px;
@@ -14,7 +15,12 @@
     flex-direction: row;
   }
 }
-
+.app-header{
+  flex-basis: 100%;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
 .panel-todo{
   flex: 1;
   width: 100%;
@@ -43,6 +49,7 @@
     flex-direction: column;
     width: 80%;
     margin-bottom: 1rem;
+    height: 22rem;
 
     &--btn-container{
       justify-content: center;
@@ -51,6 +58,11 @@
       color: #777;
       font-size: 1rem;
     }
+  }
+  &__toggle-icon{
+    height: 13rem;
+    display: flex;
+    align-items: center;
   }
   &__card{
     width: 90%;

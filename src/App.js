@@ -8,21 +8,21 @@ import CompleteList from './components/CompleteList';
 */
 const taskCardData = [
   {
-      title: "Add Taskcard",
+      title: "Task 001 Add task",
       id: 1,
       priority: "1",
       desc: "Add task into to do list",
       complete: false
   },
   {
-      title: "Delete Taskcard",
+      title: "Task 002 Taskcard",
       id: 2,
       priority: "2",
       desc: "Remove task from to do list",
       complete: true
   },
   {
-    title: "Set Priority",
+    title: "Task 003 Set Priority",
     id: 3,
     priority: "4",
     desc: "Add Priority feature into to do list",
@@ -47,6 +47,15 @@ class App extends React.Component {
     
     this.filterTasks(taskCardData);
 
+  }
+
+  /*
+    function submit new task card
+  */
+  handleTaskSubmit = (task) =>{
+    delete task.isOpen;
+    const allTaskCards = this.state.taskCardsAll.concat(task);
+    this.filterTasks(allTaskCards);
   }
 
   /*
@@ -77,6 +86,9 @@ class App extends React.Component {
     this.filterTasks(allTaskCards)
   }
 
+  /*
+    function refresh UI
+  */
   filterTasks = (allTaskCards) => {
     const todoCards = allTaskCards.filter( task =>{
       return (
@@ -102,11 +114,21 @@ class App extends React.Component {
   render(){
     return (
       <div className="app-container">
+        <div className="app-header">
+        <label>
+          <p>Sort Options</p>
+          <select onChange={this.handleCardOrder}>
+            <option value="1">Priority</option>
+            <option value="2">Name</option>
+          </select>
+        </label>
+        </div>
         <div className="panel-todo">
             <TodoList 
             taskCards = {this.state.taskCardsToDo} 
             removeTask = {this.handleTaskRemove}
             completeTask = {this.handleTaskComplete}
+            submitTask = {this.handleTaskSubmit}
             />
         </div>
         <div className="panel-complete">

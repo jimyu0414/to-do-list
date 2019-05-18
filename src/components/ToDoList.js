@@ -7,7 +7,9 @@ class ToDoList extends Component{
     render(){
         return(
             <div>
-                <ToggleableTaskCardForm />
+                <ToggleableTaskCardForm 
+                  submitCard = {this.props.submitTask}
+                />
                 <TaskCardList 
                     cards = {this.props.taskCards}
                     removeCard = {this.props.removeTask}

@@ -4,18 +4,37 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
-
-
+const uuidv4 = require('uuid/v4');
 
 class ToggleableTaskCardForm extends Component {
     state = {
         isOpen : false,
+        id: uuidv4(),
+        title:'',
         priority: 1,
+        desc:'',
+        complete: false
     };
 
-    handlePriorityChange  = (event) => {
+    handleTitleChange = (e) => {
+      this.setState(
+        {
+          title: e.target.value
+        }
+      )
+    }
+
+    handleDescChange = (e) => {
+      this.setState(
+        {
+          desc: e.target.value
+        }
+      )
+    }
+
+    handlePriorityChange  = (e) => {
         this.setState(
-            { priority: event.target.value }
+            { priority: e.target.value }
             );
       };
 
@@ -27,8 +46,9 @@ class ToggleableTaskCardForm extends Component {
         this.setState({ isOpen: false });
     }
 
-    handleFormSubmit = () => {
-
+    handleFromSubmit = () => {
+      this.setState({ isOpen: false });
+      this.props.submitCard(this.state);  
     }
 
     render(){
@@ -41,6 +61,7 @@ class ToggleableTaskCardForm extends Component {
                 label="Task Name"
                 value={this.state.name}                
                 margin="normal"
+                onChange={this.handleTitleChange}
               />
 
         <label>
@@ -61,13 +82,14 @@ class ToggleableTaskCardForm extends Component {
           multiline
           margin="normal"
           variant="outlined"
+          onChange={this.handleDescChange}
         />
 
       <CardActions className="task-card__toggle--btn-container">
         <Button size="small" color="primary" onClick={this.handleFormClose}>
           Cancel
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={this.handleFromSubmit}>
           Save
         </Button>
       </CardActions>
@@ -77,7 +99,9 @@ class ToggleableTaskCardForm extends Component {
         } else {
             
             return(
+              <div className="task-card__toggle-icon">
                <div id="" className="cross-icon" onClick={this.handleFormOpen}></div>
+              </div>
             );
 
         }
