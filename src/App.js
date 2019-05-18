@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import TodoList from './components/ToDoList';
 import CompleteList from './components/CompleteList';
+import { all } from 'q';
 
 /*
   Define initial task data
@@ -10,21 +11,21 @@ const taskCardData = [
   {
       title: "Task 001 Add task",
       id: 1,
-      priority: "1",
+      priority: 1,
       desc: "Add task into to do list",
       complete: false
   },
   {
       title: "Task 002 Taskcard",
       id: 2,
-      priority: "2",
+      priority: 2,
       desc: "Remove task from to do list",
       complete: true
   },
   {
     title: "Task 003 Set Priority",
     id: 3,
-    priority: "4",
+    priority: 4,
     desc: "Add Priority feature into to do list",
     complete: false
 },
@@ -35,7 +36,9 @@ class App extends React.Component {
   state={
     taskCardsToDo :[],
     taskCardsComplete:[],
-    taskCardsAll:[]
+    taskCardsAll:[],
+    totalToDoTasks: 0,
+    totalCompletedTasks: 0,
   };
 
   /*
@@ -62,11 +65,13 @@ class App extends React.Component {
     function remove task card
   */
   handleTaskRemove = (taskId) => {
-    this.setState({
-      taskCardsToDo: this.state.taskCardsToDo.filter(t => t.id !== taskId),
-      taskCardsComplete: this.state.taskCardsComplete.filter(t => t.id !== taskId),
-      taskCardsAll: this.state.taskCardsAll.filter(t => t.id !== taskId),
-    });
+    // this.setState({
+    //   taskCardsToDo: this.state.taskCardsToDo.filter(t => t.id !== taskId),
+    //   taskCardsComplete: this.state.taskCardsComplete.filter(t => t.id !== taskId),
+    //   taskCardsAll: this.state.taskCardsAll.filter(t => t.id !== taskId),
+    // });
+
+    this.filterTasks(this.state.taskCardsAll.filter(t => t.id !== taskId))
   }
 
   /*
@@ -87,6 +92,37 @@ class App extends React.Component {
   }
 
   /*
+    Sort task cards
+  */
+  handlesSortCardOrder = (e) => {
+    var name = e.target.value;
+    if(name ==='name'){
+      this.setState(
+        {
+        taskCardsToDo: this.state.taskCardsToDo.sort(function (a, b) {
+            return ('' + a.title).localeCompare(b.title);
+        }),
+        taskCardsComplete: this.state.taskCardsComplete.sort(function (a, b) {
+          return ('' + a.title).localeCompare(b.title);
+      }),
+        }
+      )
+    }else if (name==='priority'){
+      this.setState(
+        {
+          taskCardsToDo: this.state.taskCardsToDo.sort(function (a, b) {
+            return (b.priority - a.priority);
+        }),
+        taskCardsComplete: this.state.taskCardsComplete.sort(function (a, b) {
+          return (b.priority - a.priority);
+      })
+        }
+      )
+    }
+  }
+
+
+  /*
     function refresh UI
   */
   filterTasks = (allTaskCards) => {
@@ -102,11 +138,18 @@ class App extends React.Component {
       )
     });
 
+   
+
+    const toDoTasks = todoCards.length;
+    const completeTasks = completedCards.length;
+
     this.setState(
       {
         taskCardsToDo: todoCards,
         taskCardsComplete: completedCards,
         taskCardsAll: allTaskCards,
+        totalToDoTasks: toDoTasks,
+        totalCompletedTasks: completeTasks
       }
     )
   }
@@ -115,13 +158,22 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <div className="app-header">
-        <label>
-          <p>Sort Options</p>
-          <select onChange={this.handleCardOrder}>
-            <option value="1">Priority</option>
-            <option value="2">Name</option>
+          <div><label>
+          <p>Task Card Sort Options</p>
+          <select onChange={this.handlesSortCardOrder}>
+            <option >Sort</option>
+            <option value="priority">Priority</option>
+            <option value="name">Name</option>
           </select>
-        </label>
+        </label></div>
+          <div>
+            <p>Total To-do tasks:</p>
+            <p>{this.state.totalToDoTasks}</p>
+          </div>
+          <div>
+            <p>Total Completed tasks:</p>
+            <p>{this.state.totalCompletedTasks}</p>
+          </div>
         </div>
         <div className="panel-todo">
             <TodoList 
