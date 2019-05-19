@@ -11,6 +11,7 @@ const taskCardData = [
   {
       title: "Task 001 Add task",
       id: 1,
+      key: 1,
       priority: 1,
       desc: "Add task into to do list",
       complete: false
@@ -18,6 +19,7 @@ const taskCardData = [
   {
       title: "Task 002 Taskcard",
       id: 2,
+      key: 2,
       priority: 2,
       desc: "Remove task from to do list",
       complete: true
@@ -25,6 +27,7 @@ const taskCardData = [
   {
     title: "Task 003 Set Priority",
     id: 3,
+    key: 3,
     priority: 4,
     desc: "Add Priority feature into to do list",
     complete: false
@@ -65,12 +68,6 @@ class App extends React.Component {
     function remove task card
   */
   handleTaskRemove = (taskId) => {
-    // this.setState({
-    //   taskCardsToDo: this.state.taskCardsToDo.filter(t => t.id !== taskId),
-    //   taskCardsComplete: this.state.taskCardsComplete.filter(t => t.id !== taskId),
-    //   taskCardsAll: this.state.taskCardsAll.filter(t => t.id !== taskId),
-    // });
-
     this.filterTasks(this.state.taskCardsAll.filter(t => t.id !== taskId))
   }
 
@@ -156,8 +153,8 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="app-container">
-        <div className="app-header">
+      <div>
+      <div className="app-header">
           <div><label>
           <p>Task Card Sort Options</p>
           <select onChange={this.handlesSortCardOrder}>
@@ -175,6 +172,7 @@ class App extends React.Component {
             <p>{this.state.totalCompletedTasks}</p>
           </div>
         </div>
+      <div className="app-container">
         <div className="panel-todo">
             <TodoList 
             taskCards = {this.state.taskCardsToDo} 
@@ -190,6 +188,7 @@ class App extends React.Component {
             completeTask = {this.handleTaskComplete}
             />
         </div>
+      </div>
       </div>
   );
   }

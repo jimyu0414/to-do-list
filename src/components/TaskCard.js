@@ -24,14 +24,14 @@ class TaskCard extends Component{
       incompleted card
     */
     const button =  this.props.complete ? <CardActions>
-    <Button size="small" color="primary" onClick={this.handleCardTrash}>
+    <Button data-testid='testTaskCardDelete'  size="small" color="primary" onClick={this.handleCardTrash}>
       Remove
     </Button>
   </CardActions>  : <CardActions>
-    <Button size="small" color="primary" onClick={this.handleCardComplete}>
+    <Button data-testid='testTaskCardComplete' size="small" color="primary" onClick={this.handleCardComplete}>
       Complete
     </Button>
-    <Button size="small" color="primary" onClick={this.handleCardTrash}>
+    <Button data-testid='testTaskCardDelete' size="small" color="primary" onClick={this.handleCardTrash}>
       Remove
     </Button>
   </CardActions>
@@ -44,7 +44,7 @@ class TaskCard extends Component{
   
 
     return(
-    <Card className={cardClass + " task-card__card"}>
+    <Card  className={cardClass + " task-card__card"}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

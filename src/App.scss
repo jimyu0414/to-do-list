@@ -19,13 +19,13 @@
   flex-basis: 100%;
   width: 100%;
   text-align: center;
-  
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 2rem; 
   @include breakpoint(m){
     flex-direction: row; 
-    margin-bottom: 2rem;
   }
   div {
     margin: 0 1rem;
