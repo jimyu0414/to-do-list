@@ -9,7 +9,7 @@ const uuidv4 = require('uuid/v4');
 class ToggleableTaskCardForm extends Component {
     state = {
         isOpen : false,
-        id: uuidv4(),
+        id: '',
         title:'',
         priority: 1,
         desc:'',
@@ -47,7 +47,10 @@ class ToggleableTaskCardForm extends Component {
     }
 
     handleFromSubmit = () => {
-      this.setState({ isOpen: false });
+      this.setState({
+         isOpen: false,
+         id : uuidv4()
+        });
       this.props.submitCard(this.state);  
     }
 

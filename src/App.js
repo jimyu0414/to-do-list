@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import TodoList from './components/ToDoList';
 import CompleteList from './components/CompleteList';
-import { all } from 'q';
+
 
 /*
   Define initial task data
