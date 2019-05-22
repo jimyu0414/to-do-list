@@ -12,9 +12,12 @@ import TaskCard from './components/TaskCard';
 
 afterEach(cleanup)
 
-it('App renders without crashing', () => {
-  render(<App />);
-});
+describe('The main app' , () =>{
+  it('App renders without crashing', () => {
+    render(<App />);
+  });
+  
+})
 
 /* 
   Test Task Card Form Component
